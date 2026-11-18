@@ -34,11 +34,18 @@ export default function MovieCard({ image,
                     <Rating value={rating}></Rating>
                 </View>
 
-                <View>
+                <View style={styles.actionsRow}>
                     <Pressable style={styles.detailsButton} onPress={onDetails}>
                         <Text style={styles.detailsButtonText}>Ver detalhes</Text>
                     </Pressable>
-                    <Pressable>
+
+                    <Pressable style={[
+                        styles.favoriteButton,
+                        favorite && styles.favoriteButtonActive,
+                    ]}
+                    onPress={onFavorite}
+                    hitSlop={8}
+                    >
                         <Ionicons 
                         name={favorite ? "heart" : "heart-outline"}
                         size={20}
@@ -53,12 +60,12 @@ export default function MovieCard({ image,
 
 const styles = StyleSheet.create({
     card: {
+        marginHorizontal: 20,
         borderWidth: 1,
         borderColor: "#242b40",
         borderRadius: 18,
         backgroundColor: "#141724",
         overflow: "hidden",
-        marginHorizontal: 20,
     },
     image: {
         width: "100%",
@@ -89,6 +96,11 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         color: "#94a3b8"
     },
+    actionsRow:{
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10
+    },
     detailsButton: {
         flex: 1,
         height: 42,
@@ -103,5 +115,19 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "700",
         color: "#fff"
+    },
+    favoriteButton: {
+        width: 42,
+        height: 42,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#1e2437",
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: "#2d3650"
+    },
+    favoriteButtonActive: {
+        backgroundColor: "rgba(255, 51, 102, 0.16)",
+        borderColor: "#ff3366"
     }
-})
+});
